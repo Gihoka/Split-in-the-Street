@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://qoatl274wh7a"]
+
+[ext_resource type="PackedScene" uid="uid://m1t6tyk6dqti" path="res://scenes/player.tscn" id="1_seg08"]
+[ext_resource type="PackedScene" uid="uid://crbduxoi43q8a" path="res://scenes/kid.tscn" id="2_dww0q"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sky" type="Polygon2D" parent="."]
+position = Vector2(-98, 144)
+color = Color(0, 0.117647, 0.447059, 1)
+polygon = PackedVector2Array(102, 686, 95, -155, 2030, -156, 2018, 718)
+
+[node name="Floor" type="Polygon2D" parent="."]
+position = Vector2(-163, 861)
+scale = Vector2(1, 0.981723)
+color = Color(0.270588, 0.270588, 0.270588, 1)
+polygon = PackedVector2Array(154, -34, 2085, -15.6649, 2089, 357.149, 167, 349)
+
+[node name="Kid" parent="." instance=ExtResource("2_dww0q")]
+position = Vector2(-5, 816)
+
+[node name="Player" parent="." instance=ExtResource("1_seg08")]
+position = Vector2(86, 817)
+
+[editable path="Player"]

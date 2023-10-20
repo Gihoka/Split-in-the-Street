@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://m1t6tyk6dqti"]
+
+[ext_resource type="Script" path="res://scripts/Player.gd" id="1_6c4ny"]
+[ext_resource type="Texture2D" uid="uid://djb3j5xly82ry" path="res://icon.png" id="2_b8mrp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cloqs"]
+size = Vector2(213.313, 164)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tujki"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_b8mrp")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o34xf"]
+size = Vector2(60, 45)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_6c4ny")
+metadata/_edit_group_ = true
+
+[node name="KidFollow" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KidFollow"]
+shape = SubResource("RectangleShape2D_cloqs")
+debug_color = Color(0.741176, 0.4, 0.631373, 0.419608)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_tujki")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_o34xf")
+
+[connection signal="body_exited" from="KidFollow" to="." method="_on_kid_follow_body_exited"]

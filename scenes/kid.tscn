@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://crbduxoi43q8a"]
+
+[ext_resource type="Texture2D" uid="uid://djb3j5xly82ry" path="res://icon.png" id="1_fr3vp"]
+[ext_resource type="Script" path="res://scripts/kid.gd" id="1_pyojv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_djl2k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_fr3vp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oxo0m"]
+size = Vector2(60, 45)
+
+[node name="Kid" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_pyojv")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_djl2k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_oxo0m")
