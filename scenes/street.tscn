@@ -1,9 +1,35 @@
-[gd_scene load_steps=3 format=3 uid="uid://qoatl274wh7a"]
+[gd_scene load_steps=9 format=3 uid="uid://qoatl274wh7a"]
 
 [ext_resource type="PackedScene" uid="uid://m1t6tyk6dqti" path="res://scenes/player.tscn" id="1_seg08"]
 [ext_resource type="PackedScene" uid="uid://crbduxoi43q8a" path="res://scenes/kid.tscn" id="2_dww0q"]
+[ext_resource type="Script" path="res://scripts/bin.gd" id="3_p6fnb"]
+[ext_resource type="Texture2D" uid="uid://h478qjrlj0ml" path="res://icon2.png" id="4_gd2ls"]
+[ext_resource type="Texture2D" uid="uid://djb3j5xly82ry" path="res://icon.png" id="5_tprvf"]
+[ext_resource type="PackedScene" uid="uid://bikedkqchhjli" path="res://scenes/hud.tscn" id="6_cr7sr"]
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_xgx12"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_gd2ls")
+}],
+"loop": true,
+"name": &"close",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_tprvf")
+}],
+"loop": true,
+"name": &"far",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nx5xs"]
+size = Vector2(77, 170)
+
+[node name="Street" type="Node2D"]
 
 [node name="Sky" type="Polygon2D" parent="."]
 position = Vector2(-98, 144)
@@ -21,5 +47,25 @@ position = Vector2(-5, 816)
 
 [node name="Player" parent="." instance=ExtResource("1_seg08")]
 position = Vector2(86, 817)
+
+[node name="Bin" type="Area2D" parent="."]
+position = Vector2(537, 802)
+script = ExtResource("3_p6fnb")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Bin"]
+sprite_frames = SubResource("SpriteFrames_xgx12")
+animation = &"far"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bin"]
+shape = SubResource("RectangleShape2D_nx5xs")
+debug_color = Color(0.741176, 0.4, 0.631373, 0.419608)
+
+[node name="HUD" parent="." instance=ExtResource("6_cr7sr")]
+offset_right = 104.0
+offset_bottom = 100.0
+
+[connection signal="body_entered" from="Bin" to="Bin" method="_on_body_entered"]
+[connection signal="body_exited" from="Bin" to="Bin" method="_on_body_exited"]
 
 [editable path="Player"]
