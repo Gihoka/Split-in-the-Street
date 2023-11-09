@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://bxwffd775v4g4"]
+
+[ext_resource type="Script" path="res://scripts/bin.gd" id="1_ivhw1"]
+[ext_resource type="Texture2D" uid="uid://h478qjrlj0ml" path="res://icon2.png" id="2_us0uk"]
+[ext_resource type="Texture2D" uid="uid://djb3j5xly82ry" path="res://icon.png" id="3_ladpb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xgx12"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_us0uk")
+}],
+"loop": true,
+"name": &"player_close",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ladpb")
+}],
+"loop": true,
+"name": &"player_far",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nx5xs"]
+size = Vector2(77, 170)
+
+[node name="Bin" type="Area2D"]
+position = Vector2(537, 802)
+script = ExtResource("1_ivhw1")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_xgx12")
+animation = &"player_far"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_nx5xs")
+debug_color = Color(0.741176, 0.4, 0.631373, 0.419608)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

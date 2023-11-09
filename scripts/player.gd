@@ -1,7 +1,13 @@
 extends CharacterBody2D
 
-const SPEED = 300.0
+signal hunger_modified
 
+const SPEED = 300.0
+var hunger = 5.0
+
+func _ready():
+	hunger_modified.emit(hunger)
+	
 func _physics_process(delta):
 	var direction = Input.get_axis("Left", "Right")
 	if direction:
@@ -10,6 +16,10 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED * 3 * delta)
 	move_and_slide()
 
+func modify_hunger(value):
+	hunger = clamp(hunger + value, 0.0, 10.0)
+	hunger_modified.emit(hunger)
+	
 func _on_kid_follow_body_exited(body):
 	if body.name == "Kid":
 		if body.position.x < position.x:
@@ -20,3 +30,21 @@ func _on_kid_follow_body_exited(body):
 func _on_kid_follow_body_entered(body):
 	if body.name == "Kid":
 		body.velocity_modifier(0) 
+
+func _on_knife_food_split(part):
+	match part:
+		-2:
+			modify_hunger(2)
+		-1:
+			modify_hunger(1.5)
+		0:
+			modify_hunger(1)
+		1: 
+			modify_hunger(0.5)
+		2:
+			modify_hunger(0)
+
+
+func _on_bench_new_day():
+	position.x = 0
+	modify_hunger(-3)

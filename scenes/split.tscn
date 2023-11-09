@@ -1,0 +1,111 @@
+[gd_scene load_steps=10 format=3 uid="uid://dyrnervxvih3j"]
+
+[ext_resource type="Texture2D" uid="uid://djb3j5xly82ry" path="res://icon.png" id="1_hf646"]
+[ext_resource type="Script" path="res://scripts/split.gd" id="1_o3m4t"]
+[ext_resource type="Texture2D" uid="uid://wg3xdxeskhn8" path="res://images/tray.png" id="2_2wkfb"]
+[ext_resource type="Texture2D" uid="uid://h478qjrlj0ml" path="res://icon2.png" id="2_7nrjx"]
+[ext_resource type="Texture2D" uid="uid://dqmxkxh5iiios" path="res://images/bread.png" id="4_p73pv"]
+[ext_resource type="Script" path="res://scripts/knife.gd" id="5_rek7v"]
+
+[sub_resource type="Animation" id="Animation_ixlx0"]
+resource_name = "end"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(8.3, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 1080)]
+}
+
+[sub_resource type="Animation" id="Animation_8oq1b"]
+resource_name = "start"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(0.120742, 1),
+"update": 0,
+"values": [Vector2(0, 1080), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lep2x"]
+_data = {
+"end": SubResource("Animation_ixlx0"),
+"start": SubResource("Animation_8oq1b")
+}
+
+[node name="Split" type="MarginContainer"]
+custom_minimum_size = Vector2(1920, 1080)
+offset_top = 3.42669
+offset_right = 1920.0
+offset_bottom = 1083.43
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+script = ExtResource("1_o3m4t")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+
+[node name="Sprite2D2" type="Sprite2D" parent="HBoxContainer/HBoxContainer"]
+texture = ExtResource("1_hf646")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Tray" type="Sprite2D" parent="HBoxContainer/HBoxContainer2"]
+texture = ExtResource("2_2wkfb")
+
+[node name="Food" type="Sprite2D" parent="HBoxContainer/HBoxContainer2"]
+texture = ExtResource("4_p73pv")
+
+[node name="Sprite2D3" type="Sprite2D" parent="HBoxContainer/HBoxContainer2"]
+texture = ExtResource("4_p73pv")
+
+[node name="Sprite2D4" type="Sprite2D" parent="HBoxContainer/HBoxContainer2"]
+texture = ExtResource("4_p73pv")
+
+[node name="Sprite2D5" type="Sprite2D" parent="HBoxContainer/HBoxContainer2"]
+texture = ExtResource("4_p73pv")
+
+[node name="Knife" type="Sprite2D" parent="HBoxContainer/HBoxContainer2"]
+texture = ExtResource("1_hf646")
+script = ExtResource("5_rek7v")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+
+[node name="Sprite2D3" type="Sprite2D" parent="HBoxContainer/HBoxContainer3"]
+position = Vector2(0, 24.05)
+texture = ExtResource("2_7nrjx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lep2x")
+}
+
+[connection signal="split_finished" from="HBoxContainer/HBoxContainer2/Knife" to="." method="_on_knife_split_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="HBoxContainer/HBoxContainer2/Knife" method="_on_animation_player_animation_finished"]

@@ -1,7 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://bikedkqchhjli"]
+[gd_scene load_steps=27 format=3 uid="uid://bikedkqchhjli"]
 
 [ext_resource type="Texture2D" uid="uid://djb3j5xly82ry" path="res://icon.png" id="1_lxxrh"]
 [ext_resource type="Texture2D" uid="uid://bx4r0mg0fvpsm" path="res://images/hunger_bar.png" id="1_tu664"]
+[ext_resource type="Script" path="res://scripts/playerHungerBar.gd" id="3_1kghd"]
+[ext_resource type="Script" path="res://scripts/kidHungerBar.gd" id="4_cmcc8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hm0xg"]
 atlas = ExtResource("1_tu664")
@@ -159,9 +161,11 @@ animations = [{
 }]
 
 [node name="HUD" type="MarginContainer"]
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
@@ -173,7 +177,7 @@ layout_mode = 2
 [node name="HungerBars" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
-size_flags_vertical = 8
+size_flags_vertical = 0
 
 [node name="PlayerFace" type="Sprite2D" parent="HBoxContainer/HungerBars"]
 position = Vector2(-1, -9)
@@ -182,6 +186,7 @@ texture = ExtResource("1_lxxrh")
 [node name="PlayerHungerBar" type="AnimatedSprite2D" parent="HBoxContainer/HungerBars"]
 position = Vector2(131, 40)
 sprite_frames = SubResource("SpriteFrames_4wqb5")
+script = ExtResource("3_1kghd")
 
 [node name="KidFace" type="Sprite2D" parent="HBoxContainer/HungerBars"]
 position = Vector2(0, 110)
@@ -190,8 +195,9 @@ texture = ExtResource("1_lxxrh")
 [node name="KidHungerBar" type="AnimatedSprite2D" parent="HBoxContainer/HungerBars"]
 position = Vector2(132, 159)
 sprite_frames = SubResource("SpriteFrames_4wqb5")
+script = ExtResource("4_cmcc8")
 
 [node name="DaysCounter" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
-size_flags_vertical = 4
+size_flags_vertical = 0
