@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Split in the Street"
-run/main_scene="res://scenes/street.tscn"
+run/main_scene="res://scenes/splash_screen.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 

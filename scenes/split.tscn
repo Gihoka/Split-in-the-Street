@@ -47,9 +47,8 @@ _data = {
 
 [node name="Split" type="MarginContainer"]
 custom_minimum_size = Vector2(1920, 1080)
-offset_top = 3.42669
 offset_right = 1920.0
-offset_bottom = 1083.43
+offset_bottom = 1080.0
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
