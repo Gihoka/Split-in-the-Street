@@ -1,14 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://bxwffd775v4g4"]
+[gd_scene load_steps=7 format=3 uid="uid://bq5j7xnt2mld3"]
 
-[ext_resource type="Script" path="res://scripts/bin.gd" id="1_ivhw1"]
-[ext_resource type="Texture2D" uid="uid://h478qjrlj0ml" path="res://icon2.png" id="2_us0uk"]
-[ext_resource type="Texture2D" uid="uid://djb3j5xly82ry" path="res://icon.png" id="3_ladpb"]
+[ext_resource type="PackedScene" uid="uid://bxwffd775v4g4" path="res://scenes/food_source.tscn" id="1_lcvlc"]
+[ext_resource type="Texture2D" uid="uid://dfvpmncy5m2xq" path="res://images/bin.png" id="2_v054d"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_xgx12"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_r00in"]
+atlas = ExtResource("2_v054d")
+region = Rect2(96, 0, 96, 138)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jeyfe"]
+atlas = ExtResource("2_v054d")
+region = Rect2(0, 0, 96, 138)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2c212"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_us0uk")
+"texture": SubResource("AtlasTexture_r00in")
 }],
 "loop": true,
 "name": &"player_close",
@@ -16,28 +23,25 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_ladpb")
+"texture": SubResource("AtlasTexture_jeyfe")
 }],
 "loop": true,
 "name": &"player_far",
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nx5xs"]
-size = Vector2(77, 170)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lw3n6"]
+size = Vector2(84, 138)
 
-[node name="Bin" type="Area2D"]
-position = Vector2(537, 802)
-script = ExtResource("1_ivhw1")
+[node name="Bin" type="Node2D"]
 metadata/_edit_group_ = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_xgx12")
+[node name="FoodSource" parent="." instance=ExtResource("1_lcvlc")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="FoodSource"]
+sprite_frames = SubResource("SpriteFrames_2c212")
 animation = &"player_far"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_nx5xs")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FoodSource"]
+shape = SubResource("RectangleShape2D_lw3n6")
 debug_color = Color(0.741176, 0.4, 0.631373, 0.419608)
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="body_exited" from="." to="." method="_on_body_exited"]

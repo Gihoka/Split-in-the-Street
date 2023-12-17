@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://3lwk35qc6ka2"]
+[gd_scene load_steps=10 format=3 uid="uid://3lwk35qc6ka2"]
 
 [ext_resource type="Script" path="res://scripts/homeScreenLayerBack.gd" id="1_4vtec"]
 [ext_resource type="Script" path="res://scripts/home_screen.gd" id="1_q0c8t"]
@@ -7,17 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://dqumeqyyhaker" path="res://images/main_screen_bg_front.png" id="4_l87ja"]
 [ext_resource type="Texture2D" uid="uid://dty7qefloxf4p" path="res://images/gameTitle.png" id="6_q71pu"]
 [ext_resource type="Theme" uid="uid://nqo3du58mpkg" path="res://themes/menu_button.tres" id="8_3ulxe"]
-[ext_resource type="FontFile" uid="uid://ctlrc7xh4moxy" path="res://fonts/PixelCode.otf" id="8_lpa2t"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nkqvo"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_plgwg"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ufjnu"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ai0ae"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q3plr"]
 
 [sub_resource type="Animation" id="Animation_c8tls"]
 resource_name = "start"
@@ -91,43 +80,22 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 30
 
-[node name="Button" type="Button" parent="VBoxContainer/VBoxContainer3"]
+[node name="Play" type="Button" parent="VBoxContainer/VBoxContainer3"]
 layout_mode = 2
 theme = ExtResource("8_3ulxe")
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_focus_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_disabled_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 25
-theme_override_fonts/font = ExtResource("8_lpa2t")
-theme_override_font_sizes/font_size = 90
-theme_override_styles/normal = SubResource("StyleBoxEmpty_nkqvo")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_plgwg")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_ufjnu")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_ai0ae")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_q3plr")
 text = "Play"
 
-[node name="Button2" type="Button" parent="VBoxContainer/VBoxContainer3"]
+[node name="Achievements" type="Button" parent="VBoxContainer/VBoxContainer3"]
 layout_mode = 2
 theme = ExtResource("8_3ulxe")
 text = "Achievements"
 
-[node name="Button3" type="Button" parent="VBoxContainer/VBoxContainer3"]
+[node name="Options" type="Button" parent="VBoxContainer/VBoxContainer3"]
 layout_mode = 2
 theme = ExtResource("8_3ulxe")
 text = "Options"
 
-[node name="Button4" type="Button" parent="VBoxContainer/VBoxContainer3"]
+[node name="Quit" type="Button" parent="VBoxContainer/VBoxContainer3"]
 layout_mode = 2
 theme = ExtResource("8_3ulxe")
 text = "Quit"
@@ -141,3 +109,6 @@ polygon = PackedVector2Array(0, 0, 1920, 0, 1920, 1080, 0, 1080)
 libraries = {
 "": SubResource("AnimationLibrary_4wbuw")
 }
+
+[connection signal="pressed" from="VBoxContainer/VBoxContainer3/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer3/Quit" to="." method="_on_quit_pressed"]

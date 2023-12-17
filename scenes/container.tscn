@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://qhi2hm73pvjh"]
+
+[ext_resource type="PackedScene" uid="uid://bxwffd775v4g4" path="res://scenes/food_source.tscn" id="1_hic6s"]
+[ext_resource type="Texture2D" uid="uid://c6aom05s3tn70" path="res://images/container.png" id="2_7p3ww"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hlgmy"]
+atlas = ExtResource("2_7p3ww")
+region = Rect2(198, 0, 198, 138)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypu2b"]
+atlas = ExtResource("2_7p3ww")
+region = Rect2(0, 0, 198, 138)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2c212"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hlgmy")
+}],
+"loop": true,
+"name": &"player_close",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ypu2b")
+}],
+"loop": true,
+"name": &"player_far",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lw3n6"]
+size = Vector2(198, 138)
+
+[node name="Container" type="Node2D"]
+metadata/_edit_group_ = true
+
+[node name="FoodSource" parent="." instance=ExtResource("1_hic6s")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="FoodSource"]
+sprite_frames = SubResource("SpriteFrames_2c212")
+animation = &"player_far"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FoodSource"]
+shape = SubResource("RectangleShape2D_lw3n6")
+debug_color = Color(0.741176, 0.4, 0.631373, 0.419608)

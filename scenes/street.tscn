@@ -1,18 +1,28 @@
-[gd_scene load_steps=10 format=3 uid="uid://qoatl274wh7a"]
+[gd_scene load_steps=15 format=3 uid="uid://qoatl274wh7a"]
 
+[ext_resource type="Texture2D" uid="uid://x3issttd3i0h" path="res://images/street.png" id="1_0aaoe"]
 [ext_resource type="PackedScene" uid="uid://m1t6tyk6dqti" path="res://scenes/player.tscn" id="1_seg08"]
 [ext_resource type="Script" path="res://scripts/bench.gd" id="2_6hl3m"]
 [ext_resource type="PackedScene" uid="uid://crbduxoi43q8a" path="res://scenes/kid.tscn" id="2_dww0q"]
-[ext_resource type="Texture2D" uid="uid://djb3j5xly82ry" path="res://icon.png" id="2_wcldf"]
-[ext_resource type="Texture2D" uid="uid://h478qjrlj0ml" path="res://icon2.png" id="3_85rax"]
-[ext_resource type="PackedScene" uid="uid://bxwffd775v4g4" path="res://scenes/bin.tscn" id="3_vhrck"]
+[ext_resource type="Texture2D" uid="uid://3an1u7l4tymc" path="res://images/controls.png" id="2_x6flq"]
+[ext_resource type="PackedScene" uid="uid://qhi2hm73pvjh" path="res://scenes/container.tscn" id="3_kicua"]
+[ext_resource type="PackedScene" uid="uid://bq5j7xnt2mld3" path="res://scenes/bin.tscn" id="3_vhrck"]
+[ext_resource type="Texture2D" uid="uid://wx53s4nn3oeu" path="res://images/bench.png" id="5_0aiit"]
 [ext_resource type="PackedScene" uid="uid://bikedkqchhjli" path="res://scenes/hud.tscn" id="6_cr7sr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ufkt"]
+atlas = ExtResource("5_0aiit")
+region = Rect2(240, 0, 240, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvukf"]
+atlas = ExtResource("5_0aiit")
+region = Rect2(0, 0, 240, 144)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_81foy"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_85rax")
+"texture": SubResource("AtlasTexture_5ufkt")
 }],
 "loop": true,
 "name": &"player_close",
@@ -20,7 +30,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_wcldf")
+"texture": SubResource("AtlasTexture_kvukf")
 }],
 "loop": true,
 "name": &"player_far",
@@ -28,53 +38,91 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w76ab"]
-size = Vector2(142, 45)
+size = Vector2(240, 144)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j41va"]
+size = Vector2(51.5, 396)
 
 [node name="Street" type="Node2D"]
 
-[node name="Sky" type="Polygon2D" parent="."]
-position = Vector2(-98, 144)
-color = Color(0, 0.117647, 0.447059, 1)
-polygon = PackedVector2Array(46, 761, 95, -155, 2030, -156, 2053, 780)
+[node name="Street" type="Sprite2D" parent="."]
+position = Vector2(3390, 540)
+texture = ExtResource("1_0aaoe")
 
-[node name="Floor" type="Polygon2D" parent="."]
-position = Vector2(-254, 871)
-scale = Vector2(1.03669, 0.981723)
-color = Color(0.270588, 0.270588, 0.270588, 1)
-polygon = PackedVector2Array(154, -34, 2133.37, -32.5958, 2144.95, 139.551, 2138.19, 352.442, 167, 349)
+[node name="Controls" type="Sprite2D" parent="."]
+position = Vector2(259, 964)
+texture = ExtResource("2_x6flq")
 
 [node name="Bin" parent="." instance=ExtResource("3_vhrck")]
+position = Vector2(3630, 735)
+
+[node name="Container" parent="." instance=ExtResource("3_kicua")]
+position = Vector2(1383, 735)
 
 [node name="Bench" type="Area2D" parent="."]
-position = Vector2(1123, 797)
+position = Vector2(4236, 732)
 script = ExtResource("2_6hl3m")
+metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Bench"]
 sprite_frames = SubResource("SpriteFrames_81foy")
 animation = &"player_far"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bench"]
-position = Vector2(1, 4)
+shape = SubResource("RectangleShape2D_w76ab")
+debug_color = Color(0.741176, 0.4, 0.631373, 0.419608)
+
+[node name="Bench2" type="Area2D" parent="."]
+position = Vector2(5016, 732)
+script = ExtResource("2_6hl3m")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Bench2"]
+sprite_frames = SubResource("SpriteFrames_81foy")
+animation = &"player_far"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bench2"]
 shape = SubResource("RectangleShape2D_w76ab")
 debug_color = Color(0.741176, 0.4, 0.631373, 0.419608)
 
 [node name="Kid" parent="." instance=ExtResource("2_dww0q")]
-position = Vector2(-5, 816)
+position = Vector2(89, 741)
 
 [node name="Player" parent="." instance=ExtResource("1_seg08")]
-position = Vector2(86, 817)
+position = Vector2(164, 693)
 
-[node name="HUD" parent="." instance=ExtResource("6_cr7sr")]
-offset_right = 154.0
-offset_bottom = 150.0
+[node name="LeftWall" type="StaticBody2D" parent="."]
+position = Vector2(-27, 727)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+position = Vector2(1.25, -38)
+shape = SubResource("RectangleShape2D_j41va")
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(5935, 727)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+position = Vector2(1.25, -38)
+shape = SubResource("RectangleShape2D_j41va")
+
+[node name="Interface" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="Interface" instance=ExtResource("6_cr7sr")]
+offset_right = -1766.0
+offset_bottom = -930.0
 
 [connection signal="body_entered" from="Bench" to="Bench" method="_on_body_entered"]
 [connection signal="body_exited" from="Bench" to="Bench" method="_on_body_exited"]
 [connection signal="new_day" from="Bench" to="Kid" method="_on_bench_new_day"]
 [connection signal="new_day" from="Bench" to="Player" method="_on_bench_new_day"]
-[connection signal="hunger_modified" from="Kid" to="HUD/HBoxContainer/HungerBars/KidHungerBar" method="_on_kid_hunger_modified"]
-[connection signal="hunger_modified" from="Player" to="HUD/HBoxContainer/HungerBars/PlayerHungerBar" method="_on_player_hunger_modified"]
-[connection signal="animation_looped" from="HUD/HBoxContainer/HungerBars/PlayerHungerBar" to="Bin" method="_on_player_hunger_bar_animation_looped" binds= [4]]
+[connection signal="body_entered" from="Bench2" to="Bench2" method="_on_body_entered"]
+[connection signal="body_exited" from="Bench2" to="Bench2" method="_on_body_exited"]
+[connection signal="new_day" from="Bench2" to="Kid" method="_on_bench_new_day"]
+[connection signal="new_day" from="Bench2" to="Player" method="_on_bench_new_day"]
+[connection signal="hunger_modified" from="Kid" to="Interface/HUD/HBoxContainer/HungerBars/KidHungerBar" method="_on_kid_hunger_modified"]
+[connection signal="hunger_modified" from="Player" to="Interface/HUD/HBoxContainer/HungerBars/PlayerHungerBar" method="_on_player_hunger_modified"]
 
 [editable path="Player"]
-[editable path="HUD"]
+[editable path="Interface/HUD"]

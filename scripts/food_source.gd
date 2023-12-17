@@ -12,10 +12,10 @@ func _process(delta):
 		get_tree().paused = true
 		var split = preload("res://scenes/split.tscn").instantiate()
 		split.process_mode = PROCESS_MODE_ALWAYS
-		split.get_node("HBoxContainer/HBoxContainer2/Knife").food_split.connect($"../Player"._on_knife_food_split)
-		split.get_node("HBoxContainer/HBoxContainer2/Knife").food_split.connect($"../Kid"._on_knife_food_split)
+		split.get_node("HBoxContainer/HBoxContainer2/Knife").food_split.connect($"../../Player"._on_knife_food_split)
+		split.get_node("HBoxContainer/HBoxContainer2/Knife").food_split.connect($"../../Kid"._on_knife_food_split)
 		split.get_node("AnimationPlayer").animation_finished.connect(_on_split_animation_player_animation_finished)
-		add_sibling(split)
+		get_parent().get_parent().get_node("Interface").add_child(split)
 		
 
 func _on_body_entered(body):

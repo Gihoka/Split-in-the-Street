@@ -2,12 +2,22 @@ extends CharacterBody2D
 
 signal hunger_modified
 
-const SPEED = 300.0
+const SPEED = 250.0
 var hunger = 5.0
 
 func _ready():
 	hunger_modified.emit(hunger)
 	
+func _process(delta):
+	if velocity.x > 0:
+		$AnimatedSprite2D.flip_h = false
+		$AnimatedSprite2D.play("walk")
+	elif velocity.x < 0:
+		$AnimatedSprite2D.flip_h = true
+		$AnimatedSprite2D.play("walk")
+	else:
+		$AnimatedSprite2D.play("idle")
+
 func _physics_process(delta):
 	var direction = Input.get_axis("Left", "Right")
 	if direction:
@@ -19,6 +29,8 @@ func _physics_process(delta):
 func modify_hunger(value):
 	hunger = clamp(hunger + value, 0.0, 10.0)
 	hunger_modified.emit(hunger)
+	if hunger == 0:
+		get_tree().change_scene_to_file("res://scenes/ending_dad.tscn")
 	
 func _on_kid_follow_body_exited(body):
 	if body.name == "Kid":

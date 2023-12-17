@@ -16,7 +16,7 @@
 Button/colors/font_color = Color(0.957031, 0.964844, 0.976563, 1)
 Button/colors/font_disabled_color = Color(0.957031, 0.964844, 0.976563, 1)
 Button/colors/font_focus_color = Color(0.957031, 0.964844, 0.976563, 1)
-Button/colors/font_hover_color = Color(0.957031, 0.964844, 0.976563, 1)
+Button/colors/font_hover_color = Color(0.996094, 0.9375, 0.167969, 1)
 Button/colors/font_hover_pressed_color = Color(0.957031, 0.964844, 0.976563, 1)
 Button/colors/font_outline_color = Color(0, 0, 0, 1)
 Button/colors/font_pressed_color = Color(0.957031, 0.964844, 0.976563, 1)
@@ -28,7 +28,7 @@ Button/colors/icon_normal_color = Color(0.957031, 0.964844, 0.976563, 1)
 Button/colors/icon_pressed_color = Color(0.957031, 0.964844, 0.976563, 1)
 Button/constants/h_separation = 0
 Button/constants/icon_max_width = 0
-Button/constants/outline_size = 25
+Button/constants/outline_size = 30
 Button/font_sizes/font_size = 90
 Button/fonts/font = ExtResource("1_jq4f3")
 Button/styles/disabled = SubResource("StyleBoxEmpty_rveth")

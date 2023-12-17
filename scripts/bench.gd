@@ -14,7 +14,7 @@ func _process(delta):
 		var loading_screen = preload("res://scenes/loading_screen.tscn").instantiate()
 		loading_screen.process_mode = PROCESS_MODE_ALWAYS
 		loading_screen.get_node("AnimationPlayer").animation_finished.connect(_on_loading_screen_animation_player_animation_finished)
-		add_sibling(loading_screen)
+		get_parent().get_node("Interface").add_child(loading_screen)
 
 
 func _on_body_entered(body):
@@ -28,7 +28,5 @@ func _on_body_exited(body):
 
 func _on_loading_screen_animation_player_animation_finished(anim_name):
 	if anim_name == "start":
-		$AnimatedSprite2D.animation = "player_far"
-		new_day.emit()
-	if anim_name == "end":
 		get_tree().paused = false
+		new_day.emit()
