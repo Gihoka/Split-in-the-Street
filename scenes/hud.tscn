@@ -1,10 +1,12 @@
-[gd_scene load_steps=28 format=3 uid="uid://bikedkqchhjli"]
+[gd_scene load_steps=30 format=3 uid="uid://bikedkqchhjli"]
 
 [ext_resource type="Texture2D" uid="uid://dt5677cypu56p" path="res://images/father_portrait.png" id="1_2ckre"]
 [ext_resource type="Texture2D" uid="uid://bx4r0mg0fvpsm" path="res://images/hunger_bar.png" id="1_tu664"]
-[ext_resource type="Script" path="res://scripts/playerHungerBar.gd" id="3_1kghd"]
+[ext_resource type="Script" path="res://scripts/player_hunger_bar.gd" id="3_etqxa"]
 [ext_resource type="Texture2D" uid="uid://ci275f5aitdar" path="res://images/kid_portrait.png" id="4_7db4c"]
-[ext_resource type="Script" path="res://scripts/kidHungerBar.gd" id="4_cmcc8"]
+[ext_resource type="Script" path="res://scripts/kid_hunger_bar.gd" id="5_4m1pb"]
+[ext_resource type="FontFile" uid="uid://ctlrc7xh4moxy" path="res://fonts/PixelCode.otf" id="6_n78yw"]
+[ext_resource type="Script" path="res://scripts/days_counter.gd" id="7_7bbrn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nq7du"]
 atlas = ExtResource("1_tu664")
@@ -162,44 +164,52 @@ animations = [{
 }]
 
 [node name="HUD" type="MarginContainer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 75
-theme_override_constants/margin_top = 75
-theme_override_constants/margin_right = 75
-theme_override_constants/margin_bottom = 75
+custom_minimum_size = Vector2(1920, 1080)
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 metadata/_edit_vertical_guides_ = []
 metadata/_edit_horizontal_guides_ = []
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="HungerBars" type="VBoxContainer" parent="HBoxContainer"]
+[node name="LeftColumn" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
 
-[node name="PlayerPortrait" type="Sprite2D" parent="HBoxContainer/HungerBars"]
+[node name="PlayerPortrait" type="Sprite2D" parent="HBoxContainer/LeftColumn"]
+position = Vector2(54, 52)
 texture = ExtResource("1_2ckre")
 
-[node name="PlayerHungerBar" type="AnimatedSprite2D" parent="HBoxContainer/HungerBars"]
-position = Vector2(99, 87)
+[node name="PlayerHungerBar" type="AnimatedSprite2D" parent="HBoxContainer/LeftColumn"]
+position = Vector2(153, 139)
 sprite_frames = SubResource("SpriteFrames_4wqb5")
-script = ExtResource("3_1kghd")
+script = ExtResource("3_etqxa")
 
-[node name="KidPortrait" type="Sprite2D" parent="HBoxContainer/HungerBars"]
-position = Vector2(0, 199)
+[node name="KidPortrait" type="Sprite2D" parent="HBoxContainer/LeftColumn"]
+position = Vector2(54, 251)
 texture = ExtResource("4_7db4c")
 
-[node name="KidHungerBar" type="AnimatedSprite2D" parent="HBoxContainer/HungerBars"]
-position = Vector2(99, 286)
+[node name="KidHungerBar" type="AnimatedSprite2D" parent="HBoxContainer/LeftColumn"]
+position = Vector2(153, 338)
 sprite_frames = SubResource("SpriteFrames_4wqb5")
-script = ExtResource("4_cmcc8")
+script = ExtResource("5_4m1pb")
 
-[node name="DaysCounter" type="HBoxContainer" parent="HBoxContainer"]
+[node name="RightColumn" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 0
+
+[node name="DaysCounter" type="Label" parent="HBoxContainer/RightColumn"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 25
+theme_override_fonts/font = ExtResource("6_n78yw")
+theme_override_font_sizes/font_size = 80
+text = "Day 0"
+script = ExtResource("7_7bbrn")

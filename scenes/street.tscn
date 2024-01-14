@@ -1,12 +1,14 @@
-[gd_scene load_steps=15 format=3 uid="uid://qoatl274wh7a"]
+[gd_scene load_steps=19 format=3 uid="uid://qoatl274wh7a"]
 
 [ext_resource type="Texture2D" uid="uid://x3issttd3i0h" path="res://images/street.png" id="1_0aaoe"]
+[ext_resource type="Script" path="res://scripts/street.gd" id="1_ieflj"]
 [ext_resource type="PackedScene" uid="uid://m1t6tyk6dqti" path="res://scenes/player.tscn" id="1_seg08"]
 [ext_resource type="Script" path="res://scripts/bench.gd" id="2_6hl3m"]
 [ext_resource type="PackedScene" uid="uid://crbduxoi43q8a" path="res://scenes/kid.tscn" id="2_dww0q"]
 [ext_resource type="Texture2D" uid="uid://3an1u7l4tymc" path="res://images/controls.png" id="2_x6flq"]
 [ext_resource type="PackedScene" uid="uid://qhi2hm73pvjh" path="res://scenes/container.tscn" id="3_kicua"]
 [ext_resource type="PackedScene" uid="uid://bq5j7xnt2mld3" path="res://scenes/bin.tscn" id="3_vhrck"]
+[ext_resource type="PackedScene" uid="uid://divb3ilr18bkr" path="res://scenes/chess_table.tscn" id="4_bvxrm"]
 [ext_resource type="Texture2D" uid="uid://wx53s4nn3oeu" path="res://images/bench.png" id="5_0aiit"]
 [ext_resource type="PackedScene" uid="uid://bikedkqchhjli" path="res://scenes/hud.tscn" id="6_cr7sr"]
 
@@ -43,7 +45,28 @@ size = Vector2(240, 144)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j41va"]
 size = Vector2(51.5, 396)
 
+[sub_resource type="Animation" id="Animation_ci18v"]
+resource_name = "start"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Interface/BackgroundTransition:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vsnjp"]
+_data = {
+"start": SubResource("Animation_ci18v")
+}
+
 [node name="Street" type="Node2D"]
+script = ExtResource("1_ieflj")
 
 [node name="Street" type="Sprite2D" parent="."]
 position = Vector2(3390, 540)
@@ -52,6 +75,9 @@ texture = ExtResource("1_0aaoe")
 [node name="Controls" type="Sprite2D" parent="."]
 position = Vector2(259, 964)
 texture = ExtResource("2_x6flq")
+
+[node name="ChessTable" parent="." instance=ExtResource("4_bvxrm")]
+position = Vector2(5658, 747)
 
 [node name="Bin" parent="." instance=ExtResource("3_vhrck")]
 position = Vector2(3630, 735)
@@ -113,16 +139,39 @@ shape = SubResource("RectangleShape2D_j41va")
 offset_right = -1766.0
 offset_bottom = -930.0
 
+[node name="BackgroundTransition" type="Polygon2D" parent="Interface"]
+position = Vector2(0, -1080)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(0, 0, 1920, 0, 1920, 1080, 0, 1080)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vsnjp")
+}
+
+[connection signal="food_source_searched" from="Bin/FoodSource" to="." method="_on_food_source_food_source_searched"]
+[connection signal="food_source_searched" from="Container/FoodSource" to="." method="_on_food_source_food_source_searched"]
 [connection signal="body_entered" from="Bench" to="Bench" method="_on_body_entered"]
 [connection signal="body_exited" from="Bench" to="Bench" method="_on_body_exited"]
+[connection signal="new_day" from="Bench" to="." method="_on_bench_new_day"]
+[connection signal="new_day" from="Bench" to="ChessTable" method="_on_bench_new_day"]
+[connection signal="new_day" from="Bench" to="Bin/FoodSource" method="_on_bench_new_day"]
+[connection signal="new_day" from="Bench" to="Container/FoodSource" method="_on_bench_new_day"]
 [connection signal="new_day" from="Bench" to="Kid" method="_on_bench_new_day"]
 [connection signal="new_day" from="Bench" to="Player" method="_on_bench_new_day"]
 [connection signal="body_entered" from="Bench2" to="Bench2" method="_on_body_entered"]
 [connection signal="body_exited" from="Bench2" to="Bench2" method="_on_body_exited"]
+[connection signal="new_day" from="Bench2" to="." method="_on_bench_new_day"]
+[connection signal="new_day" from="Bench2" to="ChessTable" method="_on_bench_new_day"]
+[connection signal="new_day" from="Bench2" to="Bin/FoodSource" method="_on_bench_new_day"]
+[connection signal="new_day" from="Bench2" to="Container/FoodSource" method="_on_bench_new_day"]
 [connection signal="new_day" from="Bench2" to="Kid" method="_on_bench_new_day"]
 [connection signal="new_day" from="Bench2" to="Player" method="_on_bench_new_day"]
-[connection signal="hunger_modified" from="Kid" to="Interface/HUD/HBoxContainer/HungerBars/KidHungerBar" method="_on_kid_hunger_modified"]
-[connection signal="hunger_modified" from="Player" to="Interface/HUD/HBoxContainer/HungerBars/PlayerHungerBar" method="_on_player_hunger_modified"]
+[connection signal="hunger_modified" from="Kid" to="Interface/HUD/HBoxContainer/LeftColumn/KidHungerBar" method="_on_kid_hunger_modified"]
+[connection signal="hunger_depleted" from="Player" to="Kid" method="_on_player_hunger_depleted"]
+[connection signal="hunger_modified" from="Player" to="Interface/HUD/HBoxContainer/LeftColumn/PlayerHungerBar" method="_on_player_hunger_modified"]
 
+[editable path="Bin"]
+[editable path="Container"]
 [editable path="Player"]
 [editable path="Interface/HUD"]

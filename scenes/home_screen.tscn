@@ -1,19 +1,34 @@
-[gd_scene load_steps=10 format=3 uid="uid://3lwk35qc6ka2"]
+[gd_scene load_steps=11 format=3 uid="uid://3lwk35qc6ka2"]
 
-[ext_resource type="Script" path="res://scripts/homeScreenLayerBack.gd" id="1_4vtec"]
 [ext_resource type="Script" path="res://scripts/home_screen.gd" id="1_q0c8t"]
 [ext_resource type="Texture2D" uid="uid://dyscliowg22fd" path="res://images/main_screen_bg_back.png" id="2_gq7ae"]
-[ext_resource type="Script" path="res://scripts/HomeScreenLayerFront.gd" id="3_ewuov"]
+[ext_resource type="Script" path="res://scripts/home_screen_layer_back.gd" id="2_jswd8"]
 [ext_resource type="Texture2D" uid="uid://dqumeqyyhaker" path="res://images/main_screen_bg_front.png" id="4_l87ja"]
-[ext_resource type="Texture2D" uid="uid://dty7qefloxf4p" path="res://images/gameTitle.png" id="6_q71pu"]
+[ext_resource type="Script" path="res://scripts/home_screen_layer_front.gd" id="4_qqdm7"]
+[ext_resource type="Texture2D" uid="uid://bbai71sg6eown" path="res://images/game_title.png" id="6_ff8u6"]
 [ext_resource type="Theme" uid="uid://nqo3du58mpkg" path="res://themes/menu_button.tres" id="8_3ulxe"]
+
+[sub_resource type="Animation" id="Animation_40f1l"]
+resource_name = "end"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BackgroundTransition:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_c8tls"]
 resource_name = "start"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Background:self_modulate")
+tracks/0/path = NodePath("BackgroundTransition:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -25,19 +40,18 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4wbuw"]
 _data = {
+"end": SubResource("Animation_40f1l"),
 "start": SubResource("Animation_c8tls")
 }
 
 [node name="HomeScreen" type="MarginContainer"]
+process_mode = 3
+custom_minimum_size = Vector2(1920, 1080)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 100
-theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 100
 script = ExtResource("1_q0c8t")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -45,7 +59,7 @@ layer = -1
 
 [node name="HomeScreenLayerBack" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_mirroring = Vector2(1920, 0)
-script = ExtResource("1_4vtec")
+script = ExtResource("2_jswd8")
 
 [node name="BackgroundBack" type="TextureRect" parent="ParallaxBackground/HomeScreenLayerBack"]
 offset_left = -1446.0
@@ -55,7 +69,7 @@ texture = ExtResource("2_gq7ae")
 
 [node name="HomeScreenLayerFront" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_mirroring = Vector2(1920, 0)
-script = ExtResource("3_ewuov")
+script = ExtResource("4_qqdm7")
 
 [node name="BackgroundFront" type="TextureRect" parent="ParallaxBackground/HomeScreenLayerFront"]
 offset_right = 1920.0
@@ -64,6 +78,8 @@ texture = ExtResource("4_l87ja")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_constants/separation = 100
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer"]
@@ -73,35 +89,37 @@ size_flags_horizontal = 4
 [node name="Title" type="TextureRect" parent="VBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("6_q71pu")
+texture = ExtResource("6_ff8u6")
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 30
 
-[node name="Play" type="Button" parent="VBoxContainer/VBoxContainer3"]
+[node name="Play" type="Button" parent="VBoxContainer/VBoxContainer3" groups=["Buttons"]]
 layout_mode = 2
 theme = ExtResource("8_3ulxe")
 text = "Play"
 
-[node name="Achievements" type="Button" parent="VBoxContainer/VBoxContainer3"]
+[node name="Achievements" type="Button" parent="VBoxContainer/VBoxContainer3" groups=["Buttons"]]
 layout_mode = 2
 theme = ExtResource("8_3ulxe")
 text = "Achievements"
 
-[node name="Options" type="Button" parent="VBoxContainer/VBoxContainer3"]
+[node name="Options" type="Button" parent="VBoxContainer/VBoxContainer3" groups=["Buttons"]]
+visible = false
 layout_mode = 2
 theme = ExtResource("8_3ulxe")
 text = "Options"
 
-[node name="Quit" type="Button" parent="VBoxContainer/VBoxContainer3"]
+[node name="Quit" type="Button" parent="VBoxContainer/VBoxContainer3" groups=["Buttons"]]
 layout_mode = 2
 theme = ExtResource("8_3ulxe")
 text = "Quit"
 
-[node name="Background" type="Polygon2D" parent="."]
-visible = false
+[node name="BackgroundTransition" type="Polygon2D" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(0, -1080)
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(0, 0, 1920, 0, 1920, 1080, 0, 1080)
 
@@ -111,4 +129,6 @@ libraries = {
 }
 
 [connection signal="pressed" from="VBoxContainer/VBoxContainer3/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer3/Achievements" to="." method="_on_achievements_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer3/Quit" to="." method="_on_quit_pressed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

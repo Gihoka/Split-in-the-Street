@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://d003vl02m8jmq"]
+
+[ext_resource type="AudioStream" uid="uid://defydigvlowtf" path="res://sounds/bg_music.mp3" id="1_og3pg"]
+
+[node name="bg_music" type="Node2D"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("1_og3pg")

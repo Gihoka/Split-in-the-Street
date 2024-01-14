@@ -1,0 +1,273 @@
+[gd_scene load_steps=7 format=3 uid="uid://bgc1no87fon"]
+
+[ext_resource type="Texture2D" uid="uid://bcrmnl0nau154" path="res://images/achievements.png" id="1_ienkr"]
+[ext_resource type="Script" path="res://scripts/achievements.gd" id="1_mfluf"]
+[ext_resource type="Texture2D" uid="uid://bec3akv6cebtb" path="res://images/achievement_locked.png" id="2_3lvww"]
+[ext_resource type="Theme" uid="uid://nqo3du58mpkg" path="res://themes/menu_button.tres" id="2_x3e7h"]
+[ext_resource type="Theme" uid="uid://cnrhopbeexdv8" path="res://themes/normal_text.tres" id="4_aq1jt"]
+[ext_resource type="AudioStream" uid="uid://b1qcj7mmv3omg" path="res://sounds/button.wav" id="6_p7cej"]
+
+[node name="Achievements" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 25
+script = ExtResource("1_mfluf")
+metadata/_edit_horizontal_guides_ = []
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture = ExtResource("1_ienkr")
+stretch_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 96
+theme_override_constants/margin_top = 96
+theme_override_constants/margin_right = 96
+theme_override_constants/margin_bottom = 96
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/TextureRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 72
+
+[node name="Row1" type="HBoxContainer" parent="HBoxContainer/TextureRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 72
+
+[node name="Achievement1" type="TextureRect" parent="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row1"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_3lvww")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row1/Achievement1"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -130.0
+offset_top = -51.035
+offset_right = 130.0
+offset_bottom = -17.035
+grow_horizontal = 2
+theme = ExtResource("4_aq1jt")
+text = "The kid dies."
+
+[node name="Achievement2" type="TextureRect" parent="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row1"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_3lvww")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row1/Achievement2"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -130.0
+offset_top = -51.035
+offset_right = 130.0
+offset_bottom = -17.035
+grow_horizontal = 2
+theme = ExtResource("4_aq1jt")
+text = "The dad dies."
+
+[node name="Achievement3" type="TextureRect" parent="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row1"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_3lvww")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row1/Achievement3"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -140.0
+offset_top = -51.035
+offset_right = 140.0
+offset_bottom = -17.035
+grow_horizontal = 2
+theme = ExtResource("4_aq1jt")
+text = "They both die."
+
+[node name="Achievement4" type="TextureRect" parent="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row1"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_3lvww")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row1/Achievement4"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -270.0
+offset_top = -51.035
+offset_right = 270.0
+offset_bottom = -17.035
+grow_horizontal = 2
+theme = ExtResource("4_aq1jt")
+text = "You tried to split the kid."
+
+[node name="Row2" type="HBoxContainer" parent="HBoxContainer/TextureRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 72
+
+[node name="Achievement5" type="TextureRect" parent="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row2"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_3lvww")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row2/Achievement5"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -260.0
+offset_top = -51.035
+offset_right = 260.0
+offset_bottom = -17.035
+grow_horizontal = 2
+theme = ExtResource("4_aq1jt")
+text = "You became a chess master."
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row2"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_3lvww")
+stretch_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row2"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_3lvww")
+stretch_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row2"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_3lvww")
+stretch_mode = 2
+
+[node name="Row3" type="HBoxContainer" parent="HBoxContainer/TextureRect/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 72
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row3"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_3lvww")
+stretch_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row3"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_3lvww")
+stretch_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row3"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_3lvww")
+stretch_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row3"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_3lvww")
+stretch_mode = 2
+
+[node name="Row4" type="HBoxContainer" parent="HBoxContainer/TextureRect/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 72
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row4"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_3lvww")
+stretch_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row4"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_3lvww")
+stretch_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row4"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_3lvww")
+stretch_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row4"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_3lvww")
+stretch_mode = 2
+
+[node name="Close" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme = ExtResource("2_x3e7h")
+text = "X"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_p7cej")
+
+[connection signal="mouse_entered" from="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row1/Achievement1" to="." method="_on_achievement_1_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row1/Achievement1" to="." method="_on_achievement_1_mouse_exited"]
+[connection signal="mouse_entered" from="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row1/Achievement2" to="." method="_on_achievement_2_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row1/Achievement2" to="." method="_on_achievement_2_mouse_exited"]
+[connection signal="mouse_entered" from="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row1/Achievement3" to="." method="_on_achievement_3_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row1/Achievement3" to="." method="_on_achievement_3_mouse_exited"]
+[connection signal="mouse_entered" from="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row1/Achievement4" to="." method="_on_achievement_4_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row1/Achievement4" to="." method="_on_achievement_4_mouse_exited"]
+[connection signal="mouse_entered" from="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row2/Achievement5" to="." method="_on_achievement_5_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Row2/Achievement5" to="." method="_on_achievement_5_mouse_exited"]
+[connection signal="pressed" from="HBoxContainer/Close" to="." method="_on_close_pressed"]

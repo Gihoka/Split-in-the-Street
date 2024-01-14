@@ -1,9 +1,10 @@
 extends CharacterBody2D
 
 signal hunger_modified
+signal hunger_depleted
 
 const SPEED = 250.0
-var hunger = 5.0
+var hunger = 8.0
 
 func _ready():
 	hunger_modified.emit(hunger)
@@ -30,7 +31,7 @@ func modify_hunger(value):
 	hunger = clamp(hunger + value, 0.0, 10.0)
 	hunger_modified.emit(hunger)
 	if hunger == 0:
-		get_tree().change_scene_to_file("res://scenes/ending_dad.tscn")
+		hunger_depleted.emit()
 	
 func _on_kid_follow_body_exited(body):
 	if body.name == "Kid":
@@ -44,6 +45,10 @@ func _on_kid_follow_body_entered(body):
 		body.velocity_modifier(0) 
 
 func _on_knife_food_split(part):
+	if hunger == 0.5 && part != -2 && part != 2:
+		get_tree().paused = false
+		get_tree().change_scene_to_file("res://scenes/ending_4.tscn")
+		
 	match part:
 		-2:
 			modify_hunger(2)
@@ -59,4 +64,4 @@ func _on_knife_food_split(part):
 
 func _on_bench_new_day():
 	position.x = 0
-	modify_hunger(-3)
+	modify_hunger(-2.5)

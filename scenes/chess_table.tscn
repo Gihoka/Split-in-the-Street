@@ -1,0 +1,97 @@
+[gd_scene load_steps=10 format=3 uid="uid://divb3ilr18bkr"]
+
+[ext_resource type="Script" path="res://scripts/chess_table.gd" id="1_awvm8"]
+[ext_resource type="Texture2D" uid="uid://d0vtneoqodfru" path="res://images/chess_table.png" id="2_mhbym"]
+[ext_resource type="FontFile" uid="uid://ctlrc7xh4moxy" path="res://fonts/PixelCode.otf" id="3_7hegw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ndlaf"]
+atlas = ExtResource("2_mhbym")
+region = Rect2(96, 0, 96, 114)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y45ma"]
+atlas = ExtResource("2_mhbym")
+region = Rect2(0, 0, 96, 114)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y23mw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ndlaf")
+}],
+"loop": true,
+"name": &"player_close",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y45ma")
+}],
+"loop": true,
+"name": &"player_far",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g2q2m"]
+size = Vector2(96, 114)
+
+[sub_resource type="Animation" id="Animation_8qaoe"]
+resource_name = "talk"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 2.8, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3xnqo"]
+_data = {
+"talk": SubResource("Animation_8qaoe")
+}
+
+[node name="ChessTable" type="Area2D"]
+script = ExtResource("1_awvm8")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_y23mw")
+animation = &"player_far"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_g2q2m")
+debug_color = Color(0.741176, 0.4, 0.631373, 0.419608)
+
+[node name="Label" type="Label" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -180.0
+offset_top = -158.2
+offset_right = 180.0
+offset_bottom = -124.2
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/font = ExtResource("3_7hegw")
+theme_override_font_sizes/font_size = 30
+text = "Chess mastery 0/5."
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3xnqo")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

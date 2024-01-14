@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b0c438ydf5bv3"]
 
+[ext_resource type="Script" path="res://scripts/splash_screen.gd" id="1_5qogc"]
 [ext_resource type="Texture2D" uid="uid://mxl45xnfbg6j" path="res://images/godot_logo.svg" id="1_74axf"]
-[ext_resource type="Script" path="res://scripts/splashScreen.gd" id="1_u0t3g"]
 [ext_resource type="Texture2D" uid="uid://djb3j5xly82ry" path="res://icon.png" id="2_k4e8i"]
 
 [sub_resource type="Animation" id="Animation_qnco5"]
@@ -57,7 +57,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("1_u0t3g")
+script = ExtResource("1_5qogc")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 color = Color(0, 0, 0, 1)

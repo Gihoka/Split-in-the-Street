@@ -4,7 +4,7 @@ signal hunger_modified
 
 const SPEED = 100.0
 var walking = false
-var hunger = 5.0
+var hunger = 8.0
 
 func _ready():
 	hunger_modified.emit(hunger)
@@ -35,7 +35,7 @@ func modify_hunger(value):
 	hunger = clamp(hunger + value, 0.0, 10.0)
 	hunger_modified.emit(hunger)
 	if hunger == 0:
-		get_tree().change_scene_to_file("res://scenes/ending_kid.tscn")
+		get_tree().change_scene_to_file("res://scenes/ending_1.tscn")
 		
 func _on_knife_food_split(part):
 	match part:
@@ -53,4 +53,10 @@ func _on_knife_food_split(part):
 
 func _on_bench_new_day():
 	position.x = 0
-	modify_hunger(-3)
+	modify_hunger(-2.5)
+
+func _on_player_hunger_depleted():
+	if hunger == 0:
+		get_tree().change_scene_to_file("res://scenes/ending_3.tscn")
+	else:
+		get_tree().change_scene_to_file("res://scenes/ending_2.tscn")
